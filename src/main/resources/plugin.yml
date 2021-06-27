@@ -1,0 +1,7 @@
+name: TowerBow
+version: 2.0
+authors:
+  - Shepiock
+  - Patatovore
+api-version: 1.17
+main: fr.Hygon.TowerBow.Main
