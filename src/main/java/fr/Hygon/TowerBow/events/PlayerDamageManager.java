@@ -31,7 +31,8 @@ public class PlayerDamageManager implements Listener {
 
                 killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                 killer.setLevel(killer.getLevel() + 1);
-                deadPlayer.setLevel(0);
+                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 1, false, true, true));
+
             }
 
             int randomX = ThreadLocalRandom.current().nextInt(25, 175);
@@ -62,7 +63,10 @@ public class PlayerDamageManager implements Listener {
                 public void run() {
                     deadPlayer.spigot().respawn();
                     deadPlayer.teleport(new Location(deadPlayer.getWorld(), randomX, 150, randomZ));
-                    deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 1, false, false, true));
+                    deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 2, false, false, true));
+
+                    deadPlayer.setLevel(0);
+                    deadPlayer.getInventory().setItem(2, ItemsList.GAPPLE.getPreparedItemStack());
                 }
             }.runTaskLater(Main.getPlugin(), 1); //Il faut le delay d'un tick sinon le client peut avoir un bug graphique (death menu bugué)
 
@@ -71,7 +75,7 @@ public class PlayerDamageManager implements Listener {
                 public void run() {
                     spawnFirework.detonate();
                 }
-            }.runTaskLater(Main.getPlugin(), 7);
+            }.runTaskLater(Main.getPlugin(), 10);
         }
     }
 

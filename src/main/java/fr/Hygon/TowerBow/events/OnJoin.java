@@ -21,6 +21,7 @@ public class OnJoin implements Listener {
         Player player = event.getPlayer();
 
         player.setFoodLevel(20);
+        player.setHealth(20);
         player.setLevel(0);
         player.getInventory().clear();
 
@@ -42,7 +43,7 @@ public class OnJoin implements Listener {
         player.teleport(new Location(player.getWorld(), randomX, 150, randomZ));
 
         PlayerDamageManager.registerInvinciblePlayer(player);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 200, 1, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 2, false, false, true));
 
         new BukkitRunnable() {
             @Override

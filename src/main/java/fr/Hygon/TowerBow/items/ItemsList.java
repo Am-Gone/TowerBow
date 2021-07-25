@@ -53,7 +53,7 @@ public enum ItemsList {
         unmovablePickaxeMeta.setDisplayName("§6Stone Pickaxe");
         unmovablePickaxeMeta.setUnbreakable(true);
         unmovablePickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 2, false);
-        unmovablePickaxeMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, false);
+        unmovablePickaxeMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, false);
         unmovablePickaxeMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier("generic.attackSpeed", 10, AttributeModifier.Operation.ADD_NUMBER));
         unmovablePickaxeMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         unmovablePickaxe.setItemMeta(unmovablePickaxeMeta);
