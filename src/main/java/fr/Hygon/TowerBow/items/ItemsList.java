@@ -24,7 +24,7 @@ public enum ItemsList {
     }),
     COBBLESTONE(Material.COBBLESTONE, Component.text("Blocks")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
-        ItemStack unmovableCobblestone = new ItemStack(Material.COBBLESTONE, 2);
+        ItemStack unmovableCobblestone = new ItemStack(Material.COBBLESTONE, 32);
         ItemMeta unmovableCobblestoneMeta = unmovableCobblestone.getItemMeta();
         unmovableCobblestoneMeta.displayName(Component.text("Blocks")
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
@@ -32,7 +32,7 @@ public enum ItemsList {
 
         return unmovableCobblestone;
     }),
-    BOW(Material.BOW, Component.text("Blocks")
+    BOW(Material.BOW, Component.text("Arc")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
         ItemStack unmovableBow = new ItemStack(Material.BOW, 1);
         ItemMeta unmovableBowMeta = unmovableBow.getItemMeta();
@@ -46,7 +46,7 @@ public enum ItemsList {
 
         return unmovableBow;
     }),
-    PICKAXE(Material.STONE_PICKAXE, Component.text("Stone Pickaxe")
+    PICKAXE(Material.STONE_PICKAXE, Component.text("Pioche")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
         ItemStack unmovablePickaxe = new ItemStack(Material.STONE_PICKAXE, 1);
         ItemMeta unmovablePickaxeMeta = unmovablePickaxe.getItemMeta();

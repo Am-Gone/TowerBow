@@ -24,7 +24,7 @@ public class PlayerUtilsEvents implements Listener { // Une classe pour tous les
         new BukkitRunnable() {
             @Override
             public void run() {
-                event.getItemInHand().setAmount(2);
+                event.getItemInHand().setAmount(32);
                 event.getPlayer().updateInventory(); //#setAmount ne fais des changements que du côté du serveur, il faut donc prévenir le joueur que
                                                 // son inventaire a été mis à jour
             }

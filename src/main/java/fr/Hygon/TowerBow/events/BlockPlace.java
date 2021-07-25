@@ -31,7 +31,6 @@ public class BlockPlace implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        long startTime = System.currentTimeMillis();
         Location blockLocation = event.getBlock().getLocation();
         int[] location = new int[3];
         location[0] = blockLocation.getBlockX();
@@ -39,15 +38,12 @@ public class BlockPlace implements Listener {
         location[2] = blockLocation.getBlockZ();
 
         blocks.entrySet().removeIf(entry -> Arrays.equals(location, entry.getValue()));
-        System.out.println("break: " + (System.currentTimeMillis() - startTime));
     }
 
     public static void startTask() {
         new BukkitRunnable() {
             @Override
             public void run() {
-                long startTime = System.currentTimeMillis();
-
                 Iterator<Map.Entry<Long, int[]>> iter = blocks.entrySet().iterator();
                 while (iter.hasNext()) {
                     Map.Entry<Long, int[]> entry = iter.next();
@@ -58,7 +54,6 @@ public class BlockPlace implements Listener {
                         iter.remove();
                     }
                 }
-                System.out.println("remover: " + (System.currentTimeMillis() - startTime));
             }
         }.runTaskTimer(Main.getPlugin(), 0, 1);
     }
