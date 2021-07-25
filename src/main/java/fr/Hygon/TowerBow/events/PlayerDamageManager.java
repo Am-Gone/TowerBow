@@ -31,7 +31,7 @@ public class PlayerDamageManager implements Listener {
 
                 killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                 killer.setLevel(killer.getLevel() + 1);
-                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 1, false, true, true));
+                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2, false, true, true));
 
             }
 
@@ -63,7 +63,7 @@ public class PlayerDamageManager implements Listener {
                 public void run() {
                     deadPlayer.spigot().respawn();
                     deadPlayer.teleport(new Location(deadPlayer.getWorld(), randomX, 150, randomZ));
-                    deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 2, false, false, true));
+                    deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 300, 2, false, false, true));
 
                     deadPlayer.setLevel(0);
                     deadPlayer.getInventory().setItem(2, ItemsList.GAPPLE.getPreparedItemStack());
