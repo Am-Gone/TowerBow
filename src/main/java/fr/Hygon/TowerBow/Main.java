@@ -44,15 +44,15 @@ public class Main extends JavaPlugin {
             public void run() {
                 for(Player player : Bukkit.getOnlinePlayers()) {
                     if(PlayerDamageManager.isVulnerable(player)) {
-                        if(player.getLocation().getY() <= 160 && player.getGameMode() == GameMode.SURVIVAL && player.getHealth() > 0) {
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20, 1, false, false, true));
+                        if(player.getLocation().getY() <= 170 && player.getGameMode() == GameMode.SURVIVAL && player.getHealth() > 0) {
+                            player.damage(1);
                             player.sendTitle("§cMontez vite!", "§7Vous êtes entrain de suffoquer.", 0, 10, 10);
-                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                         }
                     }
                 }
             }
-        }.runTaskTimer(this, 0, 10);
+        }.runTaskTimer(this, 0, 20);
     }
 
     public static Plugin getPlugin() {

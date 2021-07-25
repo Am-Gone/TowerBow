@@ -32,11 +32,11 @@ public enum ItemsList {
 
         return unmovableCobblestone;
     }),
-    BOW(Material.BOW, Component.text("Arc")
+    BOW(Material.BOW, Component.text("Bow")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
         ItemStack unmovableBow = new ItemStack(Material.BOW, 1);
         ItemMeta unmovableBowMeta = unmovableBow.getItemMeta();
-        unmovableBowMeta.displayName(Component.text("Blocks")
+        unmovableBowMeta.displayName(Component.text("§6Bow")
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
         unmovableBowMeta.setUnbreakable(true);
         unmovableBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
@@ -46,7 +46,7 @@ public enum ItemsList {
 
         return unmovableBow;
     }),
-    PICKAXE(Material.STONE_PICKAXE, Component.text("Pioche")
+    PICKAXE(Material.STONE_PICKAXE, Component.text("Stone Pickaxe")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
         ItemStack unmovablePickaxe = new ItemStack(Material.STONE_PICKAXE, 1);
         ItemMeta unmovablePickaxeMeta = unmovablePickaxe.getItemMeta();
@@ -65,7 +65,7 @@ public enum ItemsList {
         ItemMeta ironHelmetMeta = ironHelmet.getItemMeta();
         ironHelmetMeta.displayName(Component.text(""));
         ironHelmetMeta.setUnbreakable(true);
-        ironHelmetMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ironHelmetMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironHelmet.setItemMeta(ironHelmetMeta);
 
         return ironHelmet;
@@ -75,7 +75,7 @@ public enum ItemsList {
         ItemMeta ironChestMeta = ironChest.getItemMeta();
         ironChestMeta.displayName(Component.text(""));
         ironChestMeta.setUnbreakable(true);
-        ironChestMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ironChestMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironChest.setItemMeta(ironChestMeta);
 
         return ironChest;
@@ -85,7 +85,7 @@ public enum ItemsList {
         ItemMeta ironLegsMeta = ironLegs.getItemMeta();
         ironLegsMeta.displayName(Component.text(""));
         ironLegsMeta.setUnbreakable(true);
-        ironLegsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ironLegsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironLegs.setItemMeta(ironLegsMeta);
 
         return ironLegs;
@@ -95,7 +95,7 @@ public enum ItemsList {
         ItemMeta ironBootsMeta = ironBoots.getItemMeta();
         ironBootsMeta.displayName(Component.text(""));
         ironBootsMeta.setUnbreakable(true);
-        ironBootsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ironBootsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironBoots.setItemMeta(ironBootsMeta);
 
         return ironBoots;

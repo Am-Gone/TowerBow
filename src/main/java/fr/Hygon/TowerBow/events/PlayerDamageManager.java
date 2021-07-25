@@ -62,7 +62,7 @@ public class PlayerDamageManager implements Listener {
                 public void run() {
                     deadPlayer.spigot().respawn();
                     deadPlayer.teleport(new Location(deadPlayer.getWorld(), randomX, 150, randomZ));
-                    deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 200, 1, false, false, true));
+                    deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 1, false, false, true));
                 }
             }.runTaskLater(Main.getPlugin(), 1); //Il faut le delay d'un tick sinon le client peut avoir un bug graphique (death menu bugué)
 
@@ -80,7 +80,7 @@ public class PlayerDamageManager implements Listener {
     }
     public static boolean isVulnerable(Player player) {
         if(invinciblePlayers.containsKey(player.getUniqueId())) {
-            return (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId())) > 10000;
+            return (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId())) > 20000;
         } else {
             return true;
         }
