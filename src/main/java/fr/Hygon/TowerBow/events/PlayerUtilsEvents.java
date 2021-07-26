@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerUtilsEvents implements Listener { // Une classe pour tous les petits events, ça évite de faire une classe par event (inutile)
@@ -47,5 +48,11 @@ public class PlayerUtilsEvents implements Listener { // Une classe pour tous les
         } else {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        event.setQuitMessage("§8» §6" + player.getName() + "§e disconnected.");
     }
 }

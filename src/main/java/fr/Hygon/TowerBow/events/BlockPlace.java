@@ -29,7 +29,7 @@ public class BlockPlace implements Listener {
         location[1] = blockLocation.getBlockY();
         location[2] = blockLocation.getBlockZ();
 
-        blocks.put(System.currentTimeMillis() + 60000, location); //Le temps avant qu'on fasse dispawn le block
+        blocks.put(System.currentTimeMillis() + 150000, location); //Le temps avant qu'on fasse dispawn le block
     }
 
     @EventHandler

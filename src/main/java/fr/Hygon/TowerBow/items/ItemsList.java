@@ -40,7 +40,7 @@ public enum ItemsList {
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
         unmovableBowMeta.setUnbreakable(true);
         unmovableBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
-        unmovableBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, false);
+        //unmovableBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, false);
         unmovableBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, false);
         unmovableBow.setItemMeta(unmovableBowMeta);
 

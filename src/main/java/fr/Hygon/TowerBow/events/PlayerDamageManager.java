@@ -31,7 +31,7 @@ public class PlayerDamageManager implements Listener {
 
                 killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                 killer.setLevel(killer.getLevel() + 1);
-                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2, false, true, true));
+                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2, false, false, true));
 
             }
 
@@ -61,7 +61,7 @@ public class PlayerDamageManager implements Listener {
                         cancel();
                     }
                     deadPlayer.getWorld().spawnParticle(Particle.FLAME, deadPlayer.getLocation().getX(), (deadPlayer.getLocation().getY() + 0.5),
-                            deadPlayer.getLocation().getZ(), 15, 0.25, 0.8, 0.25, 0.02);
+                            deadPlayer.getLocation().getZ(), 15, 0.25, 0.8, 0.25, 0.02, true);
                 }
             }.runTaskTimer(Main.getPlugin(), 0, 10);
 
@@ -74,6 +74,7 @@ public class PlayerDamageManager implements Listener {
 
                     deadPlayer.setLevel(0);
                     deadPlayer.getInventory().setItem(2, ItemsList.GAPPLE.getPreparedItemStack());
+                    deadPlayer.removePotionEffect(PotionEffectType.ABSORPTION);
                 }
             }.runTaskLater(Main.getPlugin(), 1); //Il faut le delay d'un tick sinon le client peut avoir un bug graphique (death menu bugué)
 

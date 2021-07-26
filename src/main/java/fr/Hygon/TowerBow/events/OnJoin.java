@@ -20,10 +20,14 @@ public class OnJoin implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+        event.setJoinMessage("§8» §6" + player.getName() + "§e connected.");
+
         player.setFoodLevel(20);
         player.setHealth(20);
         player.setLevel(0);
         player.getInventory().clear();
+        player.removePotionEffect(PotionEffectType.ABSORPTION);
+
 
         if(player.getEquipment() != null) {
             player.getEquipment().setHelmet(ItemsList.IRON_HELMET.getPreparedItemStack());
@@ -52,7 +56,7 @@ public class OnJoin implements Listener {
                     cancel();
                 }
                 player.getWorld().spawnParticle(Particle.FLAME, player.getLocation().getX(), (player.getLocation().getY() + 0.5),
-                        player.getLocation().getZ(), 15, 0.25, 0.8, 0.25, 0.02);
+                        player.getLocation().getZ(), 15, 0.25, 0.8, 0.25, 0.02, true);
             }
         }.runTaskTimer(Main.getPlugin(), 0, 10);
     }
