@@ -42,7 +42,7 @@ public class PlayerUtilsEvents implements Listener { // Une classe pour tous les
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         Block brokenBlock = event.getBlock();
-        if (brokenBlock.getType() == Material.COBBLESTONE) {
+        if (brokenBlock.getType() == Material.COBBLESTONE || brokenBlock.getType() == Material.MOSSY_COBBLESTONE) {
             event.setDropItems(false);
         } else {
             event.setCancelled(true);

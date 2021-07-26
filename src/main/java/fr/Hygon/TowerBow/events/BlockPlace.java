@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.event.EventHandler;
@@ -28,7 +29,7 @@ public class BlockPlace implements Listener {
         location[1] = blockLocation.getBlockY();
         location[2] = blockLocation.getBlockZ();
 
-        blocks.put(System.currentTimeMillis() + 10000, location); //Le temps avant qu'on fasse dispawn le block
+        blocks.put(System.currentTimeMillis() + 60000, location); //Le temps avant qu'on fasse dispawn le block
     }
 
     @EventHandler
@@ -55,6 +56,7 @@ public class BlockPlace implements Listener {
 
                     if(entry.getKey() <= System.currentTimeMillis() + 5000) {
                         block.setType(Material.MOSSY_COBBLESTONE);
+                        block.getWorld().playSound(block.getLocation(), Sound.BLOCK_MOSS_PLACE, 1, 1);
                     }
 
                     if(entry.getKey() <= System.currentTimeMillis()) {
