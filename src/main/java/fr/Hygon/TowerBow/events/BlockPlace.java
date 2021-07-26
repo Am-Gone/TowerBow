@@ -26,7 +26,7 @@ public class BlockPlace implements Listener {
         location[1] = blockLocation.getBlockY();
         location[2] = blockLocation.getBlockZ();
 
-        blocks.put(System.currentTimeMillis() + 600000, location); //Le temps avant qu'on fasse dispawn le block
+        blocks.put(System.currentTimeMillis() + 10000, location); //Le temps avant qu'on fasse dispawn le block
     }
 
     @EventHandler
@@ -47,9 +47,17 @@ public class BlockPlace implements Listener {
                 Iterator<Map.Entry<Long, int[]>> iter = blocks.entrySet().iterator();
                 while (iter.hasNext()) {
                     Map.Entry<Long, int[]> entry = iter.next();
+
+                    int[] coords = entry.getValue();
+                    Location location = new Location(Bukkit.getWorld("world"), coords[0], coords[1], coords[2]);
+
+                    if(entry.getKey() <= System.currentTimeMillis() + 5000) {
+
+                        location.getBlock().setType(Material.MOSSY_COBBLESTONE);
+                    }
+
                     if(entry.getKey() <= System.currentTimeMillis()) {
-                        int[] coords = entry.getValue();
-                        Location location = new Location(Bukkit.getWorld("world"), coords[0], coords[1], coords[2]);
+
                         location.getBlock().setType(Material.AIR);
                         iter.remove();
                     }
