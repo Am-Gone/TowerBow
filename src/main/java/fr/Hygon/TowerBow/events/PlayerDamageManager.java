@@ -41,9 +41,16 @@ public class PlayerDamageManager implements Listener {
             Firework spawnFirework = (Firework) deadPlayer.getWorld().spawnEntity(deadPlayer.getLocation(), EntityType.FIREWORK);
             FireworkMeta fireworkMeta = spawnFirework.getFireworkMeta();
 
-            fireworkMeta.setPower(1);
+            //fireworkMeta.setPower(2);
             fireworkMeta.addEffect(FireworkEffect.builder().withColor(Color.YELLOW).flicker(true).build());
             spawnFirework.setFireworkMeta(fireworkMeta);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    spawnFirework.detonate();
+                }
+            }.runTaskLater(Main.getPlugin(), 10);
 
             invinciblePlayers.put(deadPlayer.getUniqueId(), System.currentTimeMillis());
 
@@ -70,12 +77,6 @@ public class PlayerDamageManager implements Listener {
                 }
             }.runTaskLater(Main.getPlugin(), 1); //Il faut le delay d'un tick sinon le client peut avoir un bug graphique (death menu bugué)
 
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    spawnFirework.detonate();
-                }
-            }.runTaskLater(Main.getPlugin(), 10);
         }
     }
 

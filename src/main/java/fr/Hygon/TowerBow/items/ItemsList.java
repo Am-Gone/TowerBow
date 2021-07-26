@@ -41,7 +41,7 @@ public enum ItemsList {
         unmovableBowMeta.setUnbreakable(true);
         unmovableBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
         unmovableBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, false);
-        unmovableBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, false);
+        unmovableBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, false);
         unmovableBow.setItemMeta(unmovableBowMeta);
 
         return unmovableBow;
