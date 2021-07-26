@@ -1,22 +1,24 @@
 package fr.Hygon.TowerBow.events;
 
 import fr.Hygon.TowerBow.Main;
+import net.minecraft.core.BlockPos;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class BlockPlace implements Listener {
-    private static HashMap<Long, int[]> blocks = new HashMap<>();
+    private static final HashMap<Long, int[]> blocks = new HashMap<>();
 
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
@@ -49,16 +51,14 @@ public class BlockPlace implements Listener {
                     Map.Entry<Long, int[]> entry = iter.next();
 
                     int[] coords = entry.getValue();
-                    Location location = new Location(Bukkit.getWorld("world"), coords[0], coords[1], coords[2]);
+                    Block block = Bukkit.getWorld("world").getBlockAt(coords[0], coords[1], coords[2]);
 
                     if(entry.getKey() <= System.currentTimeMillis() + 5000) {
-
-                        location.getBlock().setType(Material.MOSSY_COBBLESTONE);
+                        block.setType(Material.MOSSY_COBBLESTONE);
                     }
 
                     if(entry.getKey() <= System.currentTimeMillis()) {
-
-                        location.getBlock().setType(Material.AIR);
+                        ((CraftWorld) block.getWorld()).getHandle().destroyBlock(new BlockPos(block.getX(), block.getY(), block.getZ()), false);
                         iter.remove();
                     }
                 }
