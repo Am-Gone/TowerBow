@@ -26,7 +26,7 @@ public class PlayerDamageManager implements Listener {
         if(event.getEntity() instanceof Player deadPlayer) {
             Player killer = deadPlayer.getKiller();
 
-            if(killer != null) {
+            if(killer != null && killer != deadPlayer) {
                 killer.getInventory().addItem(ItemsList.GAPPLE.getPreparedItemStack());
 
                 killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
@@ -41,7 +41,6 @@ public class PlayerDamageManager implements Listener {
             Firework spawnFirework = (Firework) deadPlayer.getWorld().spawnEntity(deadPlayer.getLocation(), EntityType.FIREWORK);
             FireworkMeta fireworkMeta = spawnFirework.getFireworkMeta();
 
-            //fireworkMeta.setPower(2);
             fireworkMeta.addEffect(FireworkEffect.builder().withColor(Color.YELLOW).flicker(true).build());
             spawnFirework.setFireworkMeta(fireworkMeta);
 
@@ -73,7 +72,7 @@ public class PlayerDamageManager implements Listener {
                     deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 300, 2, false, false, true));
 
                     deadPlayer.setLevel(0);
-                    deadPlayer.getInventory().setItem(2, ItemsList.GAPPLE.getPreparedItemStack());
+                    deadPlayer.getInventory().addItem(ItemsList.GAPPLE.getPreparedItemStack());
                     deadPlayer.removePotionEffect(PotionEffectType.ABSORPTION);
                 }
             }.runTaskLater(Main.getPlugin(), 1); //Il faut le delay d'un tick sinon le client peut avoir un bug graphique (death menu bugué)

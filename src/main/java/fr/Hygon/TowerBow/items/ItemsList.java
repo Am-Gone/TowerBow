@@ -14,52 +14,51 @@ import org.bukkit.inventory.meta.ItemMeta;
 public enum ItemsList {
     GAPPLE(Material.GOLDEN_APPLE, Component.text("Golden Apple")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
-        ItemStack unmovableGapple = new ItemStack(Material.GOLDEN_APPLE);
-        ItemMeta unmovableGappleMeta = unmovableGapple.getItemMeta();
-        unmovableGappleMeta.displayName(Component.text("Golden Apple")
+        ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
+        ItemMeta gappleMeta = gapple.getItemMeta();
+        gappleMeta.displayName(Component.text("Golden Apple")
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
-        unmovableGapple.setItemMeta(unmovableGappleMeta);
+        gapple.setItemMeta(gappleMeta);
 
-        return unmovableGapple;
+        return gapple;
     }),
     COBBLESTONE(Material.COBBLESTONE, Component.text("Blocks")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
-        ItemStack unmovableCobblestone = new ItemStack(Material.COBBLESTONE, 32);
-        ItemMeta unmovableCobblestoneMeta = unmovableCobblestone.getItemMeta();
-        unmovableCobblestoneMeta.displayName(Component.text("Blocks")
+        ItemStack cobblestone = new ItemStack(Material.COBBLESTONE, 32);
+        ItemMeta cobblestoneMeta = cobblestone.getItemMeta();
+        cobblestoneMeta.displayName(Component.text("Blocks")
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
-        unmovableCobblestone.setItemMeta(unmovableCobblestoneMeta);
+        cobblestone.setItemMeta(cobblestoneMeta);
 
-        return unmovableCobblestone;
+        return cobblestone;
     }),
     BOW(Material.BOW, Component.text("Bow")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
-        ItemStack unmovableBow = new ItemStack(Material.BOW, 1);
-        ItemMeta unmovableBowMeta = unmovableBow.getItemMeta();
-        unmovableBowMeta.displayName(Component.text("§6Bow")
+        ItemStack bow = new ItemStack(Material.BOW, 1);
+        ItemMeta bowMeta = bow.getItemMeta();
+        bowMeta.displayName(Component.text("§6Bow")
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
-        unmovableBowMeta.setUnbreakable(true);
-        unmovableBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
-        //unmovableBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, false);
-        unmovableBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, false);
-        unmovableBow.setItemMeta(unmovableBowMeta);
+        bowMeta.setUnbreakable(true);
+        bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
+        bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, false);
+        bow.setItemMeta(bowMeta);
 
-        return unmovableBow;
+        return bow;
     }),
     PICKAXE(Material.STONE_PICKAXE, Component.text("Stone Pickaxe")
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
-        ItemStack unmovablePickaxe = new ItemStack(Material.STONE_PICKAXE, 1);
-        ItemMeta unmovablePickaxeMeta = unmovablePickaxe.getItemMeta();
-        unmovablePickaxeMeta.setDisplayName("§6Stone Pickaxe");
-        unmovablePickaxeMeta.setUnbreakable(true);
-        unmovablePickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 2, false);
-        unmovablePickaxeMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, false);
-        unmovablePickaxeMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier("generic.attackSpeed", 10, AttributeModifier.Operation.ADD_NUMBER));
-        unmovablePickaxeMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", 1, AttributeModifier.Operation.ADD_NUMBER));
-        unmovablePickaxeMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        unmovablePickaxe.setItemMeta(unmovablePickaxeMeta);
+        ItemStack pickaxe = new ItemStack(Material.STONE_PICKAXE, 1);
+        ItemMeta pickaxeMeta = pickaxe.getItemMeta();
+        pickaxeMeta.setDisplayName("§6Stone Pickaxe");
+        pickaxeMeta.setUnbreakable(true);
+        pickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 2, false);
+        pickaxeMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, false);
+        pickaxeMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier("generic.attackSpeed", 10, AttributeModifier.Operation.ADD_NUMBER));
+        pickaxeMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier("generic.attackDamage", 1, AttributeModifier.Operation.ADD_NUMBER));
+        pickaxeMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        pickaxe.setItemMeta(pickaxeMeta);
 
-        return unmovablePickaxe;
+        return pickaxe;
     }),
     IRON_HELMET(Material.IRON_HELMET, Component.text(""), () -> {
         ItemStack ironHelmet = new ItemStack(Material.IRON_HELMET);
@@ -95,6 +94,7 @@ public enum ItemsList {
         ItemStack ironBoots = new ItemStack(Material.IRON_BOOTS);
         ItemMeta ironBootsMeta = ironBoots.getItemMeta();
         ironBootsMeta.displayName(Component.text(""));
+        ironBootsMeta.addEnchant(Enchantment.PROTECTION_FALL, 2, true);
         ironBootsMeta.setUnbreakable(true);
         ironBootsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironBoots.setItemMeta(ironBootsMeta);

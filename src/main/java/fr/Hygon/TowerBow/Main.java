@@ -1,17 +1,12 @@
 package fr.Hygon.TowerBow;
 
-import fr.Hygon.TowerBow.events.BlockPlace;
-import fr.Hygon.TowerBow.events.PlayerDamageManager;
-import fr.Hygon.TowerBow.events.OnJoin;
-import fr.Hygon.TowerBow.events.PlayerUtilsEvents;
+import fr.Hygon.TowerBow.events.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin {

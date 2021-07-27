@@ -54,13 +54,19 @@ public class BlockPlace implements Listener {
                     int[] coords = entry.getValue();
                     Block block = Bukkit.getWorld("world").getBlockAt(coords[0], coords[1], coords[2]);
 
-                    if(entry.getKey() <= System.currentTimeMillis() + 5000) {
+                    if(entry.getKey() <= System.currentTimeMillis() + 5000 && block.getType() != Material.MOSSY_COBBLESTONE) {
                         block.setType(Material.MOSSY_COBBLESTONE);
                         block.getWorld().playSound(block.getLocation(), Sound.BLOCK_MOSS_PLACE, 1, 1);
                     }
 
                     if(entry.getKey() <= System.currentTimeMillis()) {
                         ((CraftWorld) block.getWorld()).getHandle().destroyBlock(new BlockPos(block.getX(), block.getY(), block.getZ()), false);
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                block.getState().update(true);
+                            }
+                        }.runTaskLater(Main.getPlugin(), 1);
                         iter.remove();
                     }
                 }
