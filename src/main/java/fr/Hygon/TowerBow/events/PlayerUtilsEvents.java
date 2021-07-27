@@ -53,6 +53,6 @@ public class PlayerUtilsEvents implements Listener { // Une classe pour tous les
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        event.setQuitMessage("§8» §6" + player.getName() + "§e disconnected.");
+        event.setQuitMessage("§7» §6" + player.getName() + "§e disconnected.");
     }
 }
