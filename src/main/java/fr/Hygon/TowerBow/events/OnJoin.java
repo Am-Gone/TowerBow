@@ -48,6 +48,7 @@ public class OnJoin implements Listener {
 
         PlayerDamageManager.registerInvinciblePlayer(player);
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 300, 2, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 2, false, false, true));
 
         new BukkitRunnable() {
             @Override
