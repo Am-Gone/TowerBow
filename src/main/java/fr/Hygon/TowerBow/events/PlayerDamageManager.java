@@ -4,6 +4,7 @@ import fr.Hygon.TowerBow.Main;
 import fr.Hygon.TowerBow.items.ItemsList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.title.Title;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -12,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -31,14 +33,16 @@ public class PlayerDamageManager implements Listener {
         if (event.getEntity() instanceof Player deadPlayer) {
             Player killer = deadPlayer.getKiller();
 
+            resetKillStreak(deadPlayer);
             if (killer != null && killer != deadPlayer) {
+                incrementKillStreak(killer);
                 killer.getInventory().addItem(ItemsList.GAPPLE.getPreparedItemStack());
 
                 killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                 killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2, false, false, true));
 
                 final Title.Times times = Title.Times.of(Duration.ofMillis(5000), Duration.ofMillis(15000), Duration.ofMillis(5000));
-                final Title title = Title.title((Component.text("")), Component.text("KILL!").color(TextColor.color(88, 235, 52)));
+                final Title title = Title.title((Component.text("")), Component.text("KILL!").color(TextColor.color(88, 235, 52)).decoration(TextDecoration.BOLD, true));
                 killer.showTitle(title);
 
             }
@@ -80,7 +84,20 @@ public class PlayerDamageManager implements Listener {
                     deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 300, 2, false, false, true));
 
                     deadPlayer.setLevel(0);
-                    deadPlayer.getInventory().addItem(ItemsList.GAPPLE.getPreparedItemStack());
+
+                    deadPlayer.getInventory().clear();
+
+                    deadPlayer.getEquipment().setHelmet(ItemsList.IRON_HELMET.getPreparedItemStack());
+                    deadPlayer.getEquipment().setChestplate(ItemsList.IRON_CHEST.getPreparedItemStack());
+                    deadPlayer.getEquipment().setLeggings(ItemsList.IRON_LEGGINGS.getPreparedItemStack());
+                    deadPlayer.getEquipment().setBoots(ItemsList.IRON_BOOTS.getPreparedItemStack());
+
+                    deadPlayer.getInventory().setItem(0, ItemsList.PICKAXE.getPreparedItemStack());
+                    deadPlayer.getInventory().setItem(1, ItemsList.BOW.getPreparedItemStack());
+                    deadPlayer.getInventory().setItem(2, ItemsList.GAPPLE.getPreparedItemStack());
+                    deadPlayer.getInventory().setItem(9, new ItemStack(Material.ARROW));
+                    deadPlayer.getInventory().setItem(40, ItemsList.COBBLESTONE.getPreparedItemStack());
+
                     deadPlayer.removePotionEffect(PotionEffectType.ABSORPTION);
                 }
             }.runTaskLater(Main.getPlugin(), 1); //Il faut le delay d'un tick sinon le client peut avoir un bug graphique (death menu bugué)
