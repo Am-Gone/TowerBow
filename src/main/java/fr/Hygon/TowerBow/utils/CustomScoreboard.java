@@ -56,13 +56,13 @@ public class CustomScoreboard {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         scoreboard = scoreboardManager.getNewScoreboard();
 
-        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("•").color(NamedTextColor.DARK_GRAY)
+        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.DARK_GRAY)
                 .append(Component.text("Tower Bow").color(TextColor.color(240, 221, 19))
                 .append(Component.text(" •").color(NamedTextColor.DARK_GRAY))));
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        Score bar1 = objective.getScore("§8---------------");
+        Score bar1 = objective.getScore("§r§8---------------");
         bar1.setScore(11);
 
         Score yourStats = objective.getScore("§7Your Stats §8»");

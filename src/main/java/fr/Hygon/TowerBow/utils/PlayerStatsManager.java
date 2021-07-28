@@ -148,7 +148,7 @@ public class PlayerStatsManager implements Listener {
                 public void run() {
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         if(!PlayerDamageManager.isVulnerable(player)) {
-                            player.sendActionBar(Component.text("Invinsibilité")
+                            player.sendActionBar(Component.text("Invincibilité")
                                     .append(Component.text(" » ").color(NamedTextColor.GRAY))
                                     .append(Component.text(StopWatch.getHumanTime(PlayerDamageManager.getPlayerInvincibleTime(player))).color(TextColor.color(0, 220, 60))));
                         } else if(playersTimeAlive.get(player.getUniqueId()) != null) {

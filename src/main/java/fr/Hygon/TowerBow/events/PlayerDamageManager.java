@@ -117,8 +117,8 @@ public class PlayerDamageManager implements Listener {
             public void run() {
                 deadPlayer.spigot().respawn();
                 deadPlayer.teleport(new Location(deadPlayer.getWorld(), randomX, 151, randomZ));
-                deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 300, 2, false, false, true));
-                deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 300, 2, false, false, true));
+                deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 500, 2, false, false, true));
+                deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 500, 2, false, false, true));
 
                 //TODO récupérer le temps pendant lequel tu es invincible
 
@@ -148,7 +148,7 @@ public class PlayerDamageManager implements Listener {
 
     public static boolean isVulnerable(Player player) {
         if (invinciblePlayers.containsKey(player.getUniqueId())) {
-            return (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId())) > 20000;
+            return (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId())) > 35000;
         } else {
             return true;
         }
@@ -190,12 +190,11 @@ public class PlayerDamageManager implements Listener {
     }
 
     public static long getPlayerInvincibleTime(Player player) {
-        //System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId()) > 20000;
         System.out.println("Contains: " + invinciblePlayers.containsKey(player.getUniqueId()) + " isVulnerable" + isVulnerable(player));
         if(!invinciblePlayers.containsKey(player.getUniqueId()) || isVulnerable(player)) {
             return -1;
         }
 
-        return 20000 - (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId()));
+        return 35000 - (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId()));
     }
 }
