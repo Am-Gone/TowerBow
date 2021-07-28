@@ -62,10 +62,10 @@ public class CustomScoreboard {
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        Score bar1 = objective.getScore("§8-----------");
+        Score bar1 = objective.getScore("§8---------------");
         bar1.setScore(11);
 
-        Score yourStats = objective.getScore("§8Your Stats:");
+        Score yourStats = objective.getScore("§7Your Stats §8»");
         yourStats.setScore(10);
 
         Score killsScore = objective.getScore("Kills §8» §a" + kills);
@@ -83,7 +83,7 @@ public class CustomScoreboard {
         Score empty1 = objective.getScore("§1");
         empty1.setScore(5);
 
-        Score topKill = objective.getScore("§8Top Streaks:");
+        Score topKill = objective.getScore("§7Top Streaks §8»");
         topKill.setScore(4);
 
         if(bestThreeKillStreaks == null) {
@@ -96,9 +96,9 @@ public class CustomScoreboard {
         while (arrayPos != 3) {
             Score bestKillStreakScore;
             if(bestThreeKillStreaks[arrayPos].getLeft() == null) {
-                bestKillStreakScore = objective.getScore("§8• §4Aucun");
+                bestKillStreakScore = objective.getScore("§7• §4Aucun");
             } else {
-                bestKillStreakScore = objective.getScore("§8• §f" + bestThreeKillStreaks[arrayPos].getLeft() + " §8» §e" + bestThreeKillStreaks[arrayPos].getRight());
+                bestKillStreakScore = objective.getScore("§7• §f" + bestThreeKillStreaks[arrayPos].getLeft() + " §8» §e" + bestThreeKillStreaks[arrayPos].getRight());
             }
             bestKillStreakScore.setScore(scorePos);
 
@@ -106,7 +106,7 @@ public class CustomScoreboard {
             scorePos--;
         }
 
-        Score bar2 = objective.getScore("§8-----------");
+        Score bar2 = objective.getScore("§8---------------");
         bar2.setScore(0);
 
         player.setScoreboard(scoreboard);

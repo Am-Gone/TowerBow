@@ -6,6 +6,7 @@ import fr.Hygon.Yokura.MongoUtils;
 import fr.Hygon.Yokura.Yokura;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
@@ -147,7 +148,9 @@ public class PlayerStatsManager implements Listener {
                 public void run() {
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         if(!PlayerDamageManager.isVulnerable(player)) {
-                            player.sendActionBar(Component.text("Vulnérable dans: " + StopWatch.getHumanTime(PlayerDamageManager.getPlayerInvincibleTime(player))));
+                            player.sendActionBar(Component.text("Invinsibilité")
+                                    .append(Component.text(" » ").color(NamedTextColor.GRAY))
+                                    .append(Component.text(StopWatch.getHumanTime(PlayerDamageManager.getPlayerInvincibleTime(player))).color(TextColor.color(0, 220, 60))));
                         } else if(playersTimeAlive.get(player.getUniqueId()) != null) {
                             player.sendActionBar(
                                     Component.text("Dernière Mort")
