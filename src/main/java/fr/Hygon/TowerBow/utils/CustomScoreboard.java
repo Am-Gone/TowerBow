@@ -65,7 +65,7 @@ public class CustomScoreboard {
         Score bar1 = objective.getScore("§8-----------");
         bar1.setScore(11);
 
-        Score yourStats = objective.getScore("§8Your Stats:" + kills);
+        Score yourStats = objective.getScore("§8Your Stats:");
         yourStats.setScore(10);
 
         Score killsScore = objective.getScore("Kills §8» §a" + kills);
