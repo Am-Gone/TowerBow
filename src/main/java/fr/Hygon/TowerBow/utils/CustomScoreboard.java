@@ -56,9 +56,9 @@ public class CustomScoreboard {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         scoreboard = scoreboardManager.getNewScoreboard();
 
-        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.DARK_GRAY)
-                .append(Component.text("Tower Bow").color(TextColor.color(245, 227, 27))
-                .append(Component.text(" •").color(NamedTextColor.DARK_GRAY))));
+        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.GRAY)
+                .append(Component.text("Tower Bow").color(TextColor.color(255, 227, 27))
+                .append(Component.text(" •").color(NamedTextColor.GRAY))));
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 

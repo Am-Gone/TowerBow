@@ -123,7 +123,7 @@ public class PlayerDamageManager implements Listener {
                 deadPlayer.playSound(deadPlayer.getLocation(), Sound.BLOCK_ANVIL_DESTROY, 1, 0);
 
                 final Title.Times times = Title.Times.of(Duration.ofMillis(100), Duration.ofMillis(750), Duration.ofMillis(100));
-                final Title title = Title.title((Component.text("")), Component.text("YOU GOT KILLED!").color(TextColor.color(255, 31, 31)).decoration(TextDecoration.BOLD, true), times);
+                final Title title = Title.title((Component.text("")), Component.text("YOU GOT KILLED!").color(TextColor.color(255, 66, 66)).decoration(TextDecoration.BOLD, true), times);
                 deadPlayer.showTitle(title);
 
                 deadPlayer.setLevel(0);
