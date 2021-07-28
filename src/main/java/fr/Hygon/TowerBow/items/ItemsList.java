@@ -1,6 +1,7 @@
 package fr.Hygon.TowerBow.items;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
@@ -36,7 +37,7 @@ public enum ItemsList {
             .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false), () -> {
         ItemStack bow = new ItemStack(Material.BOW, 1);
         ItemMeta bowMeta = bow.getItemMeta();
-        bowMeta.displayName(Component.text("§6Bow")
+        bowMeta.displayName(Component.text("Bow")
                 .color(TextColor.color(250, 170, 0)).decoration(TextDecoration.ITALIC, false));
         bowMeta.setUnbreakable(true);
         bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
@@ -60,41 +61,41 @@ public enum ItemsList {
 
         return pickaxe;
     }),
-    IRON_HELMET(Material.IRON_HELMET, Component.text(""), () -> {
+    IRON_HELMET(Material.IRON_HELMET, Component.text("Iron Helmet"), () -> {
         ItemStack ironHelmet = new ItemStack(Material.IRON_HELMET);
         ItemMeta ironHelmetMeta = ironHelmet.getItemMeta();
-        ironHelmetMeta.displayName(Component.text(""));
+        ironHelmetMeta.displayName(Component.text("Iron Helmet").color(TextColor.color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false));
         ironHelmetMeta.setUnbreakable(true);
         ironHelmetMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironHelmet.setItemMeta(ironHelmetMeta);
 
         return ironHelmet;
     }),
-    IRON_CHEST(Material.IRON_CHESTPLATE, Component.text(""), () -> {
+    IRON_CHEST(Material.IRON_CHESTPLATE, Component.text("Iron Chestplate"), () -> {
         ItemStack ironChest = new ItemStack(Material.IRON_CHESTPLATE);
         ItemMeta ironChestMeta = ironChest.getItemMeta();
-        ironChestMeta.displayName(Component.text(""));
+        ironChestMeta.displayName(Component.text("Iron Chestplate").color(TextColor.color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false));
         ironChestMeta.setUnbreakable(true);
         ironChestMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironChest.setItemMeta(ironChestMeta);
 
         return ironChest;
     }),
-    IRON_LEGGINGS(Material.IRON_LEGGINGS, Component.text(""), () -> {
+    IRON_LEGGINGS(Material.IRON_LEGGINGS, Component.text("Iron Chestplate"), () -> {
         ItemStack ironLegs = new ItemStack(Material.IRON_LEGGINGS);
         ItemMeta ironLegsMeta = ironLegs.getItemMeta();
-        ironLegsMeta.displayName(Component.text(""));
+        ironLegsMeta.displayName(Component.text("Iron Leggings").color(TextColor.color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false));
         ironLegsMeta.setUnbreakable(true);
         ironLegsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironLegs.setItemMeta(ironLegsMeta);
 
         return ironLegs;
     }),
-    IRON_BOOTS(Material.IRON_BOOTS, Component.text(""), () -> {
+    IRON_BOOTS(Material.IRON_BOOTS, Component.text("Iron Boots"), () -> {
         ItemStack ironBoots = new ItemStack(Material.IRON_BOOTS);
         ItemMeta ironBootsMeta = ironBoots.getItemMeta();
-        ironBootsMeta.displayName(Component.text(""));
-        ironBootsMeta.addEnchant(Enchantment.PROTECTION_FALL, 2, true);
+        ironBootsMeta.displayName(Component.text("Iron Boots").color(TextColor.color(NamedTextColor.GOLD)).decoration(TextDecoration.ITALIC, false));
+        ironBootsMeta.addEnchant(Enchantment.PROTECTION_FALL, 3, true);
         ironBootsMeta.setUnbreakable(true);
         ironBootsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         ironBoots.setItemMeta(ironBootsMeta);

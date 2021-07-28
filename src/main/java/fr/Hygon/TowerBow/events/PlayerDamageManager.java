@@ -120,7 +120,11 @@ public class PlayerDamageManager implements Listener {
                 deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 500, 2, false, false, true));
                 deadPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 500, 2, false, false, true));
 
-                //TODO récupérer le temps pendant lequel tu es invincible
+                deadPlayer.playSound(deadPlayer.getLocation(), Sound.BLOCK_ANVIL_DESTROY, 1, 0);
+
+                final Title.Times times = Title.Times.of(Duration.ofMillis(100), Duration.ofMillis(750), Duration.ofMillis(100));
+                final Title title = Title.title((Component.text("")), Component.text("YOU GOT KILLED!").color(TextColor.color(255, 31, 31)).decoration(TextDecoration.BOLD, true), times);
+                deadPlayer.showTitle(title);
 
                 deadPlayer.setLevel(0);
 

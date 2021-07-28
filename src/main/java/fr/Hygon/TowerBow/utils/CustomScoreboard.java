@@ -57,7 +57,7 @@ public class CustomScoreboard {
         scoreboard = scoreboardManager.getNewScoreboard();
 
         objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.DARK_GRAY)
-                .append(Component.text("Tower Bow").color(TextColor.color(240, 221, 19))
+                .append(Component.text("Tower Bow").color(TextColor.color(245, 227, 27))
                 .append(Component.text(" •").color(NamedTextColor.DARK_GRAY))));
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
