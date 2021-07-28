@@ -1,6 +1,8 @@
 package fr.Hygon.TowerBow;
 
 import fr.Hygon.TowerBow.events.*;
+import fr.Hygon.TowerBow.utils.PlayerStatsManager;
+import fr.Hygon.TowerBow.utils.TowerBowScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -19,18 +21,22 @@ public class Main extends JavaPlugin {
 
         startDamageBelowY160Task();
         BlockPlace.startTask();
+        PlayerStatsManager.runTimerTask();
     }
 
     @Override
     public void onDisable() {
-
+        getServer().getScheduler().cancelTasks(this);
     }
 
     public void registerEvents() {
+        getServer().getPluginManager().registerEvents(new PlayerStatsManager(), this);
         getServer().getPluginManager().registerEvents(new OnJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerDamageManager(), this);
         getServer().getPluginManager().registerEvents(new PlayerUtilsEvents(), this);
         getServer().getPluginManager().registerEvents(new BlockPlace(), this);
+        getServer().getPluginManager().registerEvents(new TowerBowScoreboard(), this);
+        getServer().getPluginManager().registerEvents(new OnHit(), this);
     }
 
     public void startDamageBelowY160Task() {
