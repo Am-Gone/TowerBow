@@ -43,21 +43,46 @@ public class StopWatch { // https://stackoverflow.com/questions/625433/how-to-co
     }
 
     //elapsed time in minutes
-    public String getHumanHour() {
-        long millis = getElapsedTime();
+    public static String getHumanTime(long millis) {
         long hours = TimeUnit.MILLISECONDS.toHours(millis) % 24;
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis) % 60;
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis) % 60;
         StringBuilder time = new StringBuilder();
 
         if(hours != 0) {
-            time.append(hours).append(":").append(minutes).append(":").append(seconds);
-        } else if(minutes != 0) {
-            time.append(minutes).append(":").append(seconds);
+            time.append(getHumanHours(millis)).append(":").append(getHumanMinutes(millis)).append(":").append(getHumanSeconds(millis));
         } else {
-            time.append(seconds);
+            time.append(getHumanMinutes(millis)).append(":").append(getHumanSeconds(millis));
         }
 
         return time.toString();
+    }
+
+    private static String getHumanHours(long millis) {
+        long hours = TimeUnit.MILLISECONDS.toHours(millis) % 24;
+
+        if(hours < 10) {
+            return "0" + hours;
+        } else {
+            return String.valueOf(hours);
+        }
+    }
+
+    private static String getHumanMinutes(long millis) {
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis) % 60;
+
+        if(minutes < 10) {
+            return "0" + minutes;
+        } else {
+            return String.valueOf(minutes);
+        }
+    }
+
+    private static String getHumanSeconds(long millis) {
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis) % 60;
+
+        if(seconds < 10) {
+            return "0" + seconds;
+        } else {
+            return String.valueOf(seconds);
+        }
     }
 }

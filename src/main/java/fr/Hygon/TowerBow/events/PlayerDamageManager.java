@@ -188,4 +188,14 @@ public class PlayerDamageManager implements Listener {
             }
         }
     }
+
+    public static long getPlayerInvincibleTime(Player player) {
+        //System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId()) > 20000;
+        System.out.println("Contains: " + invinciblePlayers.containsKey(player.getUniqueId()) + " isVulnerable" + isVulnerable(player));
+        if(!invinciblePlayers.containsKey(player.getUniqueId()) || isVulnerable(player)) {
+            return -1;
+        }
+
+        return 20000 - (System.currentTimeMillis() - invinciblePlayers.get(player.getUniqueId()));
+    }
 }

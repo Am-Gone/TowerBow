@@ -1,7 +1,7 @@
 package fr.Hygon.TowerBow.utils;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.entity.Player;
@@ -55,7 +55,9 @@ public class CustomScoreboard {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         scoreboard = scoreboardManager.getNewScoreboard();
 
-        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("§7• §e§lTower Bow §r§7•"));
+        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.GRAY)
+                .append(Component.text("Tower Bow").color(NamedTextColor.YELLOW)
+                .append(Component.text(" •").color(NamedTextColor.GRAY))));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         Score killsScore = objective.getScore("§6Kills §7» §e" + kills);

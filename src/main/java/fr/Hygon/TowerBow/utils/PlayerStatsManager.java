@@ -1,11 +1,11 @@
 package fr.Hygon.TowerBow.utils;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.MongoCursor;
 import fr.Hygon.TowerBow.Main;
+import fr.Hygon.TowerBow.events.PlayerDamageManager;
 import fr.Hygon.Yokura.MongoUtils;
 import fr.Hygon.Yokura.Yokura;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
@@ -34,7 +34,6 @@ public class PlayerStatsManager implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        System.out.println("ENREGISTRÉ");
         StopWatch stopWatch = new StopWatch();
         playersTimeAlive.put(player.getUniqueId(), stopWatch);
         stopWatch.start();
@@ -124,7 +123,6 @@ public class PlayerStatsManager implements Listener {
 
         int arrayPos = 0;
         while(arrayPos != 3) {
-            System.out.println(bestThreePlayersUUID.size() + " " + arrayPos);
             if(bestThreePlayersUUID.size() <= arrayPos) {
                 bestThreeKillStreaks[arrayPos] = new ImmutablePair<>(null, 0);
             } else {
@@ -148,8 +146,13 @@ public class PlayerStatsManager implements Listener {
                 @Override
                 public void run() {
                     Bukkit.getOnlinePlayers().forEach(player -> {
-                        if(playersTimeAlive.get(player.getUniqueId()) != null) {
-                            player.sendActionBar(Component.text("Dernière Mort §7» §e" + playersTimeAlive.get(player.getUniqueId()).getHumanHour()));
+                        if(!PlayerDamageManager.isVulnerable(player)) {
+                            player.sendActionBar(Component.text("Vulnérable dans: " + StopWatch.getHumanTime(PlayerDamageManager.getPlayerInvincibleTime(player))));
+                        } else if(playersTimeAlive.get(player.getUniqueId()) != null) {
+                            player.sendActionBar(
+                                    Component.text("Dernière Mort")
+                                    .append(Component.text(" » ").color(NamedTextColor.GRAY))
+                                    .append(Component.text(StopWatch.getHumanTime(playersTimeAlive.get(player.getUniqueId()).getElapsedTime())).color(NamedTextColor.YELLOW)));
                         }
                     });
                 }
