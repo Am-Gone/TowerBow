@@ -149,7 +149,7 @@ public class PlayerStatsManager implements Listener {
                 public void run() {
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         if(playersTimeAlive.get(player.getUniqueId()) != null) {
-                            player.sendActionBar(Component.text("Mort depuis: " + playersTimeAlive.get(player.getUniqueId()).getHumanHour()));
+                            player.sendActionBar(Component.text("Dernière Mort §7» §e" + playersTimeAlive.get(player.getUniqueId()).getHumanHour()));
                         }
                     });
                 }

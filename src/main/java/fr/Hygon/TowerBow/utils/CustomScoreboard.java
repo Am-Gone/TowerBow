@@ -1,6 +1,7 @@
 package fr.Hygon.TowerBow.utils;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.entity.Player;
@@ -54,22 +55,22 @@ public class CustomScoreboard {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         scoreboard = scoreboardManager.getNewScoreboard();
 
-        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("TowerBow"));
+        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("§7• §e§lTower Bow §r§7•"));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        Score killsScore = objective.getScore("Kills: " + kills);
+        Score killsScore = objective.getScore("§6Kills §7» §e" + kills);
         killsScore.setScore(12);
 
-        Score deathsScores = objective.getScore("Morts: " + deaths);
+        Score deathsScores = objective.getScore("§6Morts §7» §e" + deaths);
         deathsScores.setScore(11);
 
         Score empty1 = objective.getScore("§1");
         empty1.setScore(10);
 
-        Score killStreakScore = objective.getScore("KillStreak: " + killStreak);
+        Score killStreakScore = objective.getScore("§6Killstreak §7» §e" + killStreak);
         killStreakScore.setScore(9);
 
-        Score topKillStreakScore = objective.getScore("Best KillStreak: " + topKillStreak);
+        Score topKillStreakScore = objective.getScore("§6Best Killstreak §7» §e" + topKillStreak);
         topKillStreakScore.setScore(8);
 
         Score empty2 = objective.getScore("§2");
@@ -85,9 +86,9 @@ public class CustomScoreboard {
         while (arrayPos != 3) {
             Score bestKillStreakScore;
             if(bestThreeKillStreaks[arrayPos].getLeft() == null) {
-                bestKillStreakScore = objective.getScore("• Aucun");
+                bestKillStreakScore = objective.getScore("§7• §cAucun");
             } else {
-                bestKillStreakScore = objective.getScore("• " + bestThreeKillStreaks[arrayPos].getLeft() + " : " + bestThreeKillStreaks[arrayPos].getRight());
+                bestKillStreakScore = objective.getScore("§7• §e" + bestThreeKillStreaks[arrayPos].getLeft() + " §7» §6" + bestThreeKillStreaks[arrayPos].getRight());
             }
             bestKillStreakScore.setScore(scorePos);
 
