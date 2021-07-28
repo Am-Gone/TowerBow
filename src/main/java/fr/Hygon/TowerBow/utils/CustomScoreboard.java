@@ -1,6 +1,7 @@
 package fr.Hygon.TowerBow.utils;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
@@ -55,46 +56,58 @@ public class CustomScoreboard {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         scoreboard = scoreboardManager.getNewScoreboard();
 
-        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("§7• §e§lTower Bow §r§7•"));
+        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("•").color(NamedTextColor.DARK_GRAY)
+                .append(Component.text("Tower Bow").color(TextColor.color(240, 221, 19))
+                .append(Component.text(" •").color(NamedTextColor.DARK_GRAY))));
+
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        Score killsScore = objective.getScore("§6Kills §7» §e" + kills);
-        killsScore.setScore(12);
+        Score bar1 = objective.getScore("§8-----------");
+        bar1.setScore(11);
 
-        Score deathsScores = objective.getScore("§6Morts §7» §e" + deaths);
-        deathsScores.setScore(11);
+        Score yourStats = objective.getScore("§8Your Stats:" + kills);
+        yourStats.setScore(10);
+
+        Score killsScore = objective.getScore("Kills §8» §a" + kills);
+        killsScore.setScore(9);
+
+        Score deathsScores = objective.getScore("Morts §8» §a" + deaths);
+        deathsScores.setScore(8);
+
+        Score killStreakScore = objective.getScore("Killstreak §8» §a" + killStreak);
+        killStreakScore.setScore(7);
+
+        Score topKillStreakScore = objective.getScore("Best Streak §8» §a" + topKillStreak);
+        topKillStreakScore.setScore(6);
 
         Score empty1 = objective.getScore("§1");
-        empty1.setScore(10);
+        empty1.setScore(5);
 
-        Score killStreakScore = objective.getScore("§6Killstreak §7» §e" + killStreak);
-        killStreakScore.setScore(9);
-
-        Score topKillStreakScore = objective.getScore("§6Best Killstreak §7» §e" + topKillStreak);
-        topKillStreakScore.setScore(8);
-
-        Score empty2 = objective.getScore("§2");
-        empty2.setScore(7);
+        Score topKill = objective.getScore("§8Top Streaks:");
+        topKill.setScore(4);
 
         if(bestThreeKillStreaks == null) {
             System.out.println("NULL");
             bestThreeKillStreaks = PlayerStatsManager.getBestThreeKillStreaks();
         }
 
-        int scorePos = 6;
+        int scorePos = 3;
         int arrayPos = 0;
         while (arrayPos != 3) {
             Score bestKillStreakScore;
             if(bestThreeKillStreaks[arrayPos].getLeft() == null) {
-                bestKillStreakScore = objective.getScore("§7• §cAucun");
+                bestKillStreakScore = objective.getScore("§8• §4Aucun");
             } else {
-                bestKillStreakScore = objective.getScore("§7• §e" + bestThreeKillStreaks[arrayPos].getLeft() + " §7» §6" + bestThreeKillStreaks[arrayPos].getRight());
+                bestKillStreakScore = objective.getScore("§8• §f" + bestThreeKillStreaks[arrayPos].getLeft() + " §8» §e" + bestThreeKillStreaks[arrayPos].getRight());
             }
             bestKillStreakScore.setScore(scorePos);
 
             arrayPos++;
             scorePos--;
         }
+
+        Score bar2 = objective.getScore("§8-----------");
+        bar2.setScore(0);
 
         player.setScoreboard(scoreboard);
     }
