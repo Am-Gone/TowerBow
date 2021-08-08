@@ -1,4 +1,4 @@
-package fr.Hygon.TowerBow.events;
+package fr.AmGone.TowerBow.events;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -20,13 +20,13 @@ public class OnHit implements Listener {
 
     @EventHandler
     public void onHit(ProjectileHitEvent event) {
-        if(event.getEntity().getShooter() instanceof Player player && event.getHitEntity() != null) {
-
+        if(event.getEntity().getShooter() instanceof Player && event.getHitEntity() != null) {
+            Player player = (Player) event.getEntity().getShooter();
             double distance = player.getLocation().distance(event.getHitEntity().getLocation());
             if(distance >= 50) {
                 for(Player players : Bukkit.getOnlinePlayers()) {
                     players.sendMessage(Component.text("» ").color(TextColor.color(NamedTextColor.GRAY))
-                            .append(Component.text("LONG SHOT! ")).color(TextColor.color(245, 143, 27)).decoration(TextDecoration.BOLD, true)
+                            .append(Component.text("LONG SHOT! ").color(TextColor.color(245, 143, 27)).decoration(TextDecoration.BOLD, true))
                             .append(Component.text(player.getName()).color(NamedTextColor.YELLOW).decoration(TextDecoration.BOLD, false))
                             .append(Component.text(" a fait un long shot de ").color(NamedTextColor.GRAY)
                             .append(Component.text(decimalFormat.format(distance) + " blocks").color(TextColor.color(255, 66, 66)))

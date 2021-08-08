@@ -1,25 +1,20 @@
-package fr.Hygon.TowerBow.utils;
+package fr.AmGone.TowerBow.utils;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
 public class CustomScoreboard {
-    private static ImmutablePair<String, Integer>[] bestThreeKillStreaks = null;
-
-    private Scoreboard scoreboard;
-    private Objective objective;
+    private static Pair<String, Integer>[] bestThreeKillStreaks = null;
 
     private final Player player;
 
     private int kills;
     private int deaths;
     private int killStreak;
-    private int topKillStreak;
 
     public CustomScoreboard(Player player) {
         this.player = player;
@@ -27,12 +22,11 @@ public class CustomScoreboard {
         kills = PlayerStatsManager.getKills(player);
         deaths = PlayerStatsManager.getDeaths(player);
         killStreak = 0;
-        topKillStreak = PlayerStatsManager.getBestKillStreak(player);
 
         updateScoreboard();
     }
 
-    public static void setBestThreeKillStreaks(ImmutablePair<String, Integer>[] bestThreeKillStreaks) {
+    public static void setBestThreeKillStreaks(Pair<String, Integer>[] bestThreeKillStreaks) {
         CustomScoreboard.bestThreeKillStreaks = bestThreeKillStreaks;
     }
 
@@ -48,17 +42,13 @@ public class CustomScoreboard {
         this.killStreak = killStreak;
     }
 
-    public void setTopKillStreak(int topKillStreak) {
-        this.topKillStreak = topKillStreak;
-    }
-
     public void updateScoreboard() {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-        scoreboard = scoreboardManager.getNewScoreboard();
+        Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
 
-        objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.GRAY)
+        Objective objective = scoreboard.registerNewObjective("Hygon", "dummy", Component.text("• ").color(NamedTextColor.GRAY)
                 .append(Component.text("Tower Bow").color(TextColor.color(255, 227, 27))
-                .append(Component.text(" •").color(NamedTextColor.GRAY))));
+                        .append(Component.text(" •").color(NamedTextColor.GRAY))));
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
@@ -77,9 +67,6 @@ public class CustomScoreboard {
         Score killStreakScore = objective.getScore("Killstreak §8» §a" + killStreak);
         killStreakScore.setScore(7);
 
-        Score topKillStreakScore = objective.getScore("Best Streak §8» §a" + topKillStreak);
-        topKillStreakScore.setScore(6);
-
         Score empty1 = objective.getScore("§1");
         empty1.setScore(5);
 
@@ -95,10 +82,10 @@ public class CustomScoreboard {
         int arrayPos = 0;
         while (arrayPos != 3) {
             Score bestKillStreakScore;
-            if(bestThreeKillStreaks[arrayPos].getLeft() == null) {
+            if(bestThreeKillStreaks[arrayPos].first == null) {
                 bestKillStreakScore = objective.getScore("§7• §4Aucun");
             } else {
-                bestKillStreakScore = objective.getScore("§7• §f" + bestThreeKillStreaks[arrayPos].getLeft() + " §8» §e" + bestThreeKillStreaks[arrayPos].getRight());
+                bestKillStreakScore = objective.getScore("§7• §f" + bestThreeKillStreaks[arrayPos].first + " §8» §e" + bestThreeKillStreaks[arrayPos].second);
             }
             bestKillStreakScore.setScore(scorePos);
 

@@ -1,4 +1,4 @@
-package fr.Hygon.TowerBow.items;
+package fr.AmGone.TowerBow.items;
 
 import org.bukkit.inventory.ItemStack;
 

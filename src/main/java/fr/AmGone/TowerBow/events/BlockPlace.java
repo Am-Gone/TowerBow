@@ -1,7 +1,7 @@
-package fr.Hygon.TowerBow.events;
+package fr.AmGone.TowerBow.events;
 
-import fr.Hygon.TowerBow.Main;
-import net.minecraft.core.BlockPos;
+import fr.AmGone.TowerBow.Main;
+import net.minecraft.core.BlockPosition;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -60,7 +60,7 @@ public class BlockPlace implements Listener {
                     }
 
                     if(entry.getKey() <= System.currentTimeMillis()) {
-                        ((CraftWorld) block.getWorld()).getHandle().destroyBlock(new BlockPos(block.getX(), block.getY(), block.getZ()), false);
+                        ((CraftWorld) block.getWorld()).getHandle().b(new BlockPosition(block.getX(), block.getY(), block.getZ()), false);
                         new BukkitRunnable() {
                             @Override
                             public void run() {

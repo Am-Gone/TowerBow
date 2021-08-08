@@ -1,4 +1,4 @@
-package fr.Hygon.TowerBow.items;
+package fr.AmGone.TowerBow.items;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

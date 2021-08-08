@@ -1,10 +1,9 @@
-package fr.Hygon.TowerBow.events;
+package fr.AmGone.TowerBow.events;
 
-import fr.Hygon.TowerBow.Main;
-import fr.Hygon.TowerBow.items.ItemsList;
-import fr.Hygon.TowerBow.utils.PlayerStatsManager;
-import fr.Hygon.TowerBow.utils.TowerBowScoreboard;
-import fr.Hygon.Yokura.MongoUtils;
+import fr.AmGone.TowerBow.Main;
+import fr.AmGone.TowerBow.utils.PlayerStatsManager;
+import fr.AmGone.TowerBow.utils.TowerBowScoreboard;
+import fr.AmGone.TowerBow.items.ItemsList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -27,7 +26,6 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
-import static fr.Hygon.TowerBow.utils.PlayerStatsManager.*;
 
 public class PlayerDamageManager implements Listener {
     private static final HashMap<UUID, Long> invinciblePlayers = new HashMap<>();
@@ -52,10 +50,10 @@ public class PlayerDamageManager implements Listener {
                     .append(Component.text(" est mort.").color(TextColor.color(255, 255, 65))));
         }
 
-        resetKillStreak(deadPlayer);
+        PlayerStatsManager.resetKillStreak(deadPlayer);
         PlayerStatsManager.resetTimer(deadPlayer);
         if (killer != null && killer != deadPlayer) {
-            incrementKillStreak(killer);
+            PlayerStatsManager.incrementKillStreak(killer);
             TowerBowScoreboard.getScoreboard(killer).addKill();
             TowerBowScoreboard.updateScoreboard(killer);
 
@@ -68,13 +66,13 @@ public class PlayerDamageManager implements Listener {
             final Title title = Title.title((Component.text("")), Component.text("KILL!").color(TextColor.color(88, 235, 52)).decoration(TextDecoration.BOLD, true), times);
             killer.showTitle(title);
 
-            if (getKillStreak(killer) == 3 || getKillStreak(killer) == 5 || getKillStreak(killer) == 10 || getKillStreak(killer) == 15 || getKillStreak(killer) == 20 ||
-                    getKillStreak(killer) == 25 || getKillStreak(killer) == 50) {
+            if (PlayerStatsManager.getKillStreak(killer) == 3 || PlayerStatsManager.getKillStreak(killer) == 5 || PlayerStatsManager.getKillStreak(killer) == 10 || PlayerStatsManager.getKillStreak(killer) == 15 || PlayerStatsManager.getKillStreak(killer) == 20 ||
+                    PlayerStatsManager.getKillStreak(killer) == 25 || PlayerStatsManager.getKillStreak(killer) == 50) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     players.sendMessage(Component.text("» ").color(TextColor.color(150, 150, 150))
                             .append(Component.text(killer.getName()).color(TextColor.color(255, 163, 33)))
                             .append(Component.text(" a fait une série de ").color(TextColor.color(255, 255, 65)))
-                            .append(Component.text(getKillStreak(killer)).color(TextColor.color(255, 163, 33)))
+                            .append(Component.text(PlayerStatsManager.getKillStreak(killer)).color(TextColor.color(255, 163, 33)))
                             .append(Component.text(" kills!").color(TextColor.color(255, 255, 65))));
                 }
             }
@@ -99,7 +97,7 @@ public class PlayerDamageManager implements Listener {
         invinciblePlayers.put(deadPlayer.getUniqueId(), System.currentTimeMillis());
         TowerBowScoreboard.getScoreboard(deadPlayer).addDeaths();
         TowerBowScoreboard.updateScoreboard(deadPlayer);
-        MongoUtils.increment("towerbow", deadPlayer.getUniqueId().toString(), "deaths", 1);
+        PlayerStatsManager.incrementDeath(deadPlayer);
 
         new BukkitRunnable() {
             @Override

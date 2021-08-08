@@ -1,4 +1,4 @@
-package fr.Hygon.TowerBow.utils;
+package fr.AmGone.TowerBow.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

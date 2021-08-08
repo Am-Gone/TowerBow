@@ -1,6 +1,6 @@
-package fr.Hygon.TowerBow.events;
+package fr.AmGone.TowerBow.events;
 
-import fr.Hygon.TowerBow.Main;
+import fr.AmGone.TowerBow.Main;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;

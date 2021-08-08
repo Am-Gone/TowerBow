@@ -1,18 +1,13 @@
-package fr.Hygon.TowerBow.utils;
+package fr.AmGone.TowerBow.utils;
 
-import fr.Hygon.TowerBow.Main;
-import fr.Hygon.TowerBow.events.PlayerDamageManager;
-import fr.Hygon.Yokura.MongoUtils;
-import fr.Hygon.Yokura.Yokura;
+import fr.AmGone.TowerBow.Main;
+import fr.AmGone.TowerBow.events.PlayerDamageManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
-import org.bson.Document;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -27,28 +22,20 @@ import java.util.stream.Collectors;
 
 public class PlayerStatsManager implements Listener {
     private static final HashMap<UUID, Integer> playersKillStreak = new HashMap<>();
-
     private static final HashMap<UUID, StopWatch> playersTimeAlive = new HashMap<>();
+    private static final HashMap<UUID, Integer> playersKills = new HashMap<>();
+    private static final HashMap<UUID, Integer> playersDeaths = new HashMap<>();
+
     private static BukkitTask task = null;
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         StopWatch stopWatch = new StopWatch();
         playersTimeAlive.put(player.getUniqueId(), stopWatch);
+        playersKillStreak.put(player.getUniqueId(), 0);
         stopWatch.start();
-
-        if(!MongoUtils.documentExists("towerbow", player.getUniqueId().toString())) {
-            Document document = new Document("_id", player.getUniqueId().toString())
-                    .append("kills", 0)
-                    .append("deaths", 0)
-                    .append("killstreak", 0)
-                    .append("player_name", player.getName());
-            Yokura.getMongoDatabase().getCollection("towerbow").insertOne(document);
-        } else if(!MongoUtils.getString("towerbow", player.getUniqueId().toString(), "player_name").equals(player.getName())) {
-            MongoUtils.updateValue("towerbow", player.getUniqueId().toString(), "player_name", player.getName());
-        }
     }
 
     @EventHandler
@@ -87,14 +74,9 @@ public class PlayerStatsManager implements Listener {
         CustomScoreboard.setBestThreeKillStreaks(getBestThreeKillStreaks());
         Bukkit.getOnlinePlayers().forEach(TowerBowScoreboard::updateScoreboard);
 
-        if(getBestKillStreak(player) < getKillStreak(player)) {
-            MongoUtils.increment("towerbow", player.getUniqueId().toString(), "killstreak", 1);
-            CustomScoreboard.setBestThreeKillStreaks(getBestThreeKillStreaks());
-            TowerBowScoreboard.getScoreboard(player).setTopKillStreak(getKillStreak(player));
-            Bukkit.getOnlinePlayers().forEach(players -> TowerBowScoreboard.updateScoreboard(player));
-        }
-
-        MongoUtils.increment("towerbow", player.getUniqueId().toString(), "kills", 1);
+        checkIfKillAndDeathExists(player);
+        playersKills.put(player.getUniqueId(), playersKills.get(player.getUniqueId()) + 1);
+        //MongoUtils.increment("towerbow", player.getUniqueId().toString(), "kills", 1);
     }
 
     public static void resetKillStreak(Player player) {
@@ -107,28 +89,23 @@ public class PlayerStatsManager implements Listener {
         Bukkit.getOnlinePlayers().forEach(TowerBowScoreboard::updateScoreboard);
     }
 
-    public static int getBestKillStreak(Player player) {
-        int killStreak = MongoUtils.getInt("towerbow", player.getUniqueId().toString(), "killstreak");
-        return killStreak > -1 ? killStreak : 0;
-    }
-
     public static int getKills(Player player) {
-        int kills = MongoUtils.getInt("towerbow", player.getUniqueId().toString(), "kills");
-        return kills > -1 ? kills : 0;
+        checkIfKillAndDeathExists(player);
+        return playersKills.get(player.getUniqueId());
     }
 
-    public static ImmutablePair<String, Integer>[] getBestThreeKillStreaks() {
-        ImmutablePair<String, Integer>[] bestThreeKillStreaks = new ImmutablePair[3];
+    public static Pair<String, Integer>[] getBestThreeKillStreaks() {
+        Pair<String, Integer>[] bestThreeKillStreaks = new Pair[3];
         // https://stackoverflow.com/questions/62077736/how-to-get-the-3-highest-values-in-a-hashmap/62078310#62078310
         List<UUID> bestThreePlayersUUID = playersKillStreak.entrySet().stream().sorted(Map.Entry.<UUID, Integer>comparingByValue().reversed()).limit(3).map(Map.Entry::getKey).collect(Collectors.toList());
 
         int arrayPos = 0;
         while(arrayPos != 3) {
             if(bestThreePlayersUUID.size() <= arrayPos) {
-                bestThreeKillStreaks[arrayPos] = new ImmutablePair<>(null, 0);
+                bestThreeKillStreaks[arrayPos] = new Pair<>(null, 0);
             } else {
                 UUID playerUUID = bestThreePlayersUUID.get(arrayPos);
-                bestThreeKillStreaks[arrayPos] = new ImmutablePair<>(Bukkit.getPlayer(playerUUID).getName(), playersKillStreak.get(playerUUID));
+                bestThreeKillStreaks[arrayPos] = new Pair<>(Bukkit.getPlayer(playerUUID).getName(), playersKillStreak.get(playerUUID));
             }
             arrayPos++;
         }
@@ -136,9 +113,23 @@ public class PlayerStatsManager implements Listener {
         return bestThreeKillStreaks;
     }
 
+    public static void incrementDeath(Player player) {
+        playersDeaths.put(player.getUniqueId(), getDeaths(player) + 1);
+    }
+
     public static int getDeaths(Player player) {
-        int deaths = MongoUtils.getInt("towerbow", player.getUniqueId().toString(), "deaths");
-        return deaths > -1 ? deaths : 0;
+        checkIfKillAndDeathExists(player);
+        return playersDeaths.get(player.getUniqueId());
+    }
+
+    public static void checkIfKillAndDeathExists(Player player) {
+        if(!playersKills.containsKey(player.getUniqueId())) {
+            playersKills.put(player.getUniqueId(), 0);
+        }
+
+        if(!playersDeaths.containsKey(player.getUniqueId())) {
+            playersDeaths.put(player.getUniqueId(), 0);
+        }
     }
 
     public static void runTimerTask() {

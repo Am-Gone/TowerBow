@@ -1,7 +1,11 @@
-package fr.Hygon.TowerBow.events;
+package fr.AmGone.TowerBow.events;
 
-import fr.Hygon.TowerBow.Main;
-import fr.Hygon.TowerBow.items.ItemsList;
+import fr.AmGone.TowerBow.Main;
+import fr.AmGone.TowerBow.items.ItemsList;
+import fr.AmGone.TowerBow.utils.CustomScoreboard;
+import fr.AmGone.TowerBow.utils.PlayerStatsManager;
+import fr.AmGone.TowerBow.utils.TowerBowScoreboard;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -26,6 +30,8 @@ public class OnJoin implements Listener {
         player.setHealth(20);
         player.setLevel(0);
         player.getInventory().clear();
+        CustomScoreboard.setBestThreeKillStreaks(PlayerStatsManager.getBestThreeKillStreaks());
+        Bukkit.getOnlinePlayers().forEach(TowerBowScoreboard::updateScoreboard);
         player.removePotionEffect(PotionEffectType.ABSORPTION);
 
 

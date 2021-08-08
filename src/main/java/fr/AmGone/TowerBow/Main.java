@@ -1,8 +1,8 @@
-package fr.Hygon.TowerBow;
+package fr.AmGone.TowerBow;
 
-import fr.Hygon.TowerBow.events.*;
-import fr.Hygon.TowerBow.utils.PlayerStatsManager;
-import fr.Hygon.TowerBow.utils.TowerBowScoreboard;
+import fr.AmGone.TowerBow.events.*;
+import fr.AmGone.TowerBow.utils.PlayerStatsManager;
+import fr.AmGone.TowerBow.utils.TowerBowScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
